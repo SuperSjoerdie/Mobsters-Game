@@ -1,30 +1,32 @@
 function TGame(){
-	return (function(){
+		var self = {};
 		
 		// private declarations
 		var started	= false;
 		var events 	= {};
 
 		// public declarations
-		this.GetVersion = function () { return {Major: 0, Minor: 3}; };
-		this.GetName 	= function () { return 'Mobsters'; };
-		this.Frame		= 0;
+		self.GetVersion = function () { return {Major: 0, Minor: 3}; };
+		self.GetName 	= function () { return 'Mobsters'; };
+		self.Frame		= 0;
 		
-		this.Screen = $('#gamescreen');
+		self.Screen = $('#gamescreen'); // for quick access
+
+		self.World = TWorld();
 		
 		// private functions		
 		function Update(){
 			if (!started) return false;
 			 
-			this.Frame ++; 
-			console.log(this.Frame);
+			self.Frame ++; 
+			console.log(self.Frame);
 			
 			window.setTimeout(Update, 1000);
 			return true;
 		};	
 		
 		// public functions	
-		this.AddEventListener = function(trigger_name, ontrigger){
+		self.AddEventListener = function(trigger_name, ontrigger){
 			if (!events[trigger_name]){
 				events[trigger_name] = {last_id: 0, list: new Array()};
 			}
@@ -37,7 +39,7 @@ function TGame(){
 			return {name: trigger_name, id: current.last_id};
 		};
 		
-		this.CallEvent = function(trigger_name, data){
+		self.CallEvent = function(trigger_name, data){
 			var current = events[trigger_name];
 			 
 			if (current){
@@ -49,7 +51,7 @@ function TGame(){
 			return false;
 		};
 		
-		this.RemoveEventListener = function(trigger_data){
+		self.RemoveEventListener = function(trigger_data){
 			var current = events[trigger_data.name];
 			 
 			if (current)
@@ -62,14 +64,12 @@ function TGame(){
 			return false;
 		};
 		
-		this.Start = function(){
-			if (!started)  started = true; else return false;
-			Update();
+		self.Start = function(){
+			if (!started) started = true; else return false;
+			Update(); // Kick-Start the update loop
 			
 			return true;
 		};
-	
-	return this;
-	
-	})();	
+
+	return self;
 }

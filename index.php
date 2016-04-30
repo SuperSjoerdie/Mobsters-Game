@@ -21,6 +21,8 @@
   		<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
 	  	<script type="text/javascript" src="js/base.js"></script>
 	  	<script type="text/javascript" src="js/game.js"></script>
+	  	<script type="text/javascript" src="js/world.js"></script>
+	  	<script type="text/javascript" src="js/persons.js"></script>
 	</head>
 	<body>
 		<div id="gamescreen"></div>
